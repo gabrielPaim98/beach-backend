@@ -5,6 +5,7 @@ import { ForecastController } from './controllers/forecast';
 import { Application } from 'express';
 import * as database from '@src/database';
 import { BeachController } from './controllers/beaches';
+import { UsersController } from './controllers/users';
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
@@ -24,7 +25,12 @@ export class SetupServer extends Server {
   private setupControllers(): void {
     const forecastController = new ForecastController();
     const beacheController = new BeachController();
-    this.addControllers([forecastController, beacheController]);
+    const usersController = new UsersController();
+    this.addControllers([
+      forecastController,
+      beacheController,
+      usersController,
+    ]);
   }
 
   private async databaseSetup(): Promise<void> {
